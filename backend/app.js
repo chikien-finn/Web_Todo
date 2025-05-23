@@ -30,3 +30,13 @@ app.use("/api/v2", list); // Routes xử lý todo list
 app.listen(4000, () => {
   console.log("Server is running on port 4000");
 });
+
+
+const path = require("path");
+
+//serve frontend
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
