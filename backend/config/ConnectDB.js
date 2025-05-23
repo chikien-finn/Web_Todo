@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
-const connectDB = async (req, res) => {
+const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/Todo_App").then;
+    const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Todo_App";
+    await mongoose.connect(mongoURI);
     console.log("Database connected");
   } catch (error) {
-    res.status(400).json({ message: "Not Connected" });
+    console.error("Database connection error:", error);
   }
 };
+
 connectDB();
